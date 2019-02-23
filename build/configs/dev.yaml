@@ -1,0 +1,10 @@
+## Server Configuration
+SERVER_IP: "127.0.0.1"
+SERVER_PORT: "3000"
+
+## Router Configuration
+ROUTER_BASE_PATH: "/"
+
+## JWT Authentication Configuration
+JWT_PRIVATE_KEY_FILE: "./build/private.key"
+JWT_PUBLIC_KEY_FILE: "./build/public.key"
