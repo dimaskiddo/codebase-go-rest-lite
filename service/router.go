@@ -55,8 +55,8 @@ func initRouter() {
 		handlers.AllowedMethods(routerCORSCfg.Methods))(Router))
 
 	// Set Router Default Not Found Handler
-	Router.NotFoundHandler = http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
-		ResponseNotFound(w)
+	Router.NotFoundHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		ResponseNotFound(w, "Not Found Method "+r.Method+" at URI "+r.RequestURI)
 	})
 }
 
@@ -95,14 +95,19 @@ func ResponseSuccess(w http.ResponseWriter, message string) {
 }
 
 // ResponseNotFound Function
-func ResponseNotFound(w http.ResponseWriter) {
+func ResponseNotFound(w http.ResponseWriter, message string) {
 	var response FormatError
+
+	// Set Default Message
+	if len(message) == 0 {
+		message = "Not Found"
+	}
 
 	// Set Response Data
 	response.Status = false
 	response.Code = http.StatusNotFound
 	response.Message = "Not Found"
-	response.Error = "Not Found"
+	response.Error = message
 
 	// Set Response Data to HTTP
 	ResponseWrite(w, response.Code, response)
