@@ -10,6 +10,10 @@ func Initialize() {
 	log.Println("Initialize - Config")
 	initConfig()
 
+	// Initialize Cryptography
+	log.Println("Initialize - Cryptography")
+	initCrypt()
+
 	// Initialize Router
 	log.Println("Initialize - Router")
 	initRouter()

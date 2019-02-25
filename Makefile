@@ -1,6 +1,6 @@
 GO_OUTPUT ?= main
 GO_EXPOSE_PORT ?= 3000
-DOCKER_IMAGE_NAME ?= frame-go
+DOCKER_IMAGE_NAME ?= frame-go-lite
 DOCKER_IMAGE_VERSION ?= latest
 
 git-push:
