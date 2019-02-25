@@ -11,7 +11,7 @@ func Initialize() {
 	initConfig()
 
 	// Initialize Cryptography
-	log.Println("Initialize - Cryptography")
+	log.Println("Initialize - Crypto")
 	initCrypt()
 
 	// Initialize Router

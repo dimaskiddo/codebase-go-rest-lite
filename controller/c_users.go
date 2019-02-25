@@ -48,7 +48,7 @@ func AddUser(w http.ResponseWriter, r *http.Request) {
 	// Insert User to Users Array
 	mdl.Users = append(mdl.Users, user)
 
-	svc.ResponseCreated(w, "")
+	svc.ResponseCreated(w)
 }
 
 // GetUserByID Function to Get User Data By User ID
@@ -105,7 +105,7 @@ func PutUserByID(w http.ResponseWriter, r *http.Request) {
 			mdl.Users[userID-1].Name = user.Name
 			mdl.Users[userID-1].Email = user.Email
 
-			svc.ResponseUpdated(w, "")
+			svc.ResponseUpdated(w)
 		} else {
 			svc.ResponseBadRequest(w, "Invalid array index")
 			log.Println("Invalid array index")
