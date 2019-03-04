@@ -18,11 +18,9 @@ func init() {
 	svc.Initialize()
 
 	// Initialize Routes
-	svc.Log("info", "service-initialize", "initialize routes")
 	initRoutes()
 
 	// Initialize Server
-	svc.Log("info", "service-initialize", "initialize server")
 	mainServer = svc.NewServer(svc.RouterHandler)
 }
 
