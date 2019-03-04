@@ -53,6 +53,14 @@
   version = "v1.0.0"
 
 [[projects]]
+  digest = "1:31e761d97c76151dde79e9d28964a812c46efc5baee4085b86f68f0c654450de"
+  name = "github.com/konsorten/go-windows-terminal-sequences"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "f55edac94c9bbba5d6182a4be46d86a2c9b5b50e"
+  version = "v1.0.2"
+
+[[projects]]
   digest = "1:c568d7727aa262c32bdf8a3f7db83614f7af0ed661474b24588de635c20024c7"
   name = "github.com/magiconair/properties"
   packages = ["."]
@@ -75,6 +83,14 @@
   pruneopts = "UT"
   revision = "c01d1270ff3e442a8a57cddc1c92dc1138598194"
   version = "v1.2.0"
+
+[[projects]]
+  digest = "1:87c2e02fb01c27060ccc5ba7c5a407cc91147726f8f40b70cceeedbc52b1f3a8"
+  name = "github.com/sirupsen/logrus"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "e1e72e9de974bd926e5c56f83753fba2df402ce5"
+  version = "v1.3.0"
 
 [[projects]]
   digest = "1:3e39bafd6c2f4bf3c76c3bfd16a2e09e016510ad5db90dc02b88e2f565d6d595"
@@ -121,11 +137,22 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:2b3af1b9e9da32687d49a1fc6eda120a66fbb07c615c6e6a126e7eee4790f9d8"
-  name = "golang.org/x/sys"
-  packages = ["unix"]
+  digest = "1:058e9504b9a79bfe86092974d05bb3298d2aa0c312d266d43148de289a5065d9"
+  name = "golang.org/x/crypto"
+  packages = ["ssh/terminal"]
   pruneopts = "UT"
-  revision = "d455e41777fca6e8a5a79e34a14b8368bc11d9ba"
+  revision = "8dd112bcdc25174059e45e07517d9fc663123347"
+
+[[projects]]
+  branch = "master"
+  digest = "1:4331a1ccaa56cb90dba6ddd13797c221205af5ba719cbdbd701f44532dde19ea"
+  name = "golang.org/x/sys"
+  packages = [
+    "unix",
+    "windows",
+  ]
+  pruneopts = "UT"
+  revision = "c2f5717e611cf8e89a852a41081355194d80c943"
 
 [[projects]]
   digest = "1:8029e9743749d4be5bc9f7d42ea1659471767860f0cdc34d37c3111bd308a295"
@@ -157,6 +184,7 @@
     "github.com/dgrijalva/jwt-go",
     "github.com/gorilla/handlers",
     "github.com/gorilla/mux",
+    "github.com/sirupsen/logrus",
     "github.com/spf13/viper",
   ]
   solver-name = "gps-cdcl"

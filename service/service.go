@@ -1,20 +1,20 @@
 package service
 
-import (
-	"log"
-)
-
 // Initialize Function in Utils
 func Initialize() {
+	// Initialize Logger
+	initLog()
+	Log("info", "service-initialize", "initialize log")
+
 	// Initialize Configuration
-	log.Println("Initialize - Config")
+	Log("info", "service-initialize", "initialize config")
 	initConfig()
 
 	// Initialize Cryptography
-	log.Println("Initialize - Crypto")
+	Log("info", "service-initialize", "initialize crypto")
 	initCrypt()
 
 	// Initialize Router
-	log.Println("Initialize - Router")
+	Log("info", "service-initialize", "initialize router")
 	initRouter()
 }
