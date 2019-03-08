@@ -3,7 +3,7 @@ package controller
 import (
 	"net/http"
 
-	svc "github.com/dimaskiddo/frame-go-lite/service"
+	svc "github.com/dimaskiddo/codebase-go-rest-lite/service"
 )
 
 // GetIndex Function to Show API Information
