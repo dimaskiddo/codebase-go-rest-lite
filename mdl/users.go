@@ -1,4 +1,4 @@
-package model
+package mdl
 
 // User Struct
 type User struct {

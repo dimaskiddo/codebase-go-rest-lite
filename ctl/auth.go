@@ -1,15 +1,16 @@
-package controller
+package ctl
 
 import (
 	"encoding/json"
 	"net/http"
 
-	svc "github.com/dimaskiddo/codebase-go-rest-lite/service"
+	"github.com/dimaskiddo/codebase-go-rest-lite/hlp/auth"
+	"github.com/dimaskiddo/codebase-go-rest-lite/hlp/router"
 )
 
 // GetAuth Function to Get Authorization Token
 func GetAuth(w http.ResponseWriter, r *http.Request) {
-	var reqBody svc.ReqGetBasic
+	var reqBody auth.ReqGetBasic
 
 	// Decode JSON from Request Body to Authorization Data
 	// Use _ As Temporary Variable
@@ -17,23 +18,23 @@ func GetAuth(w http.ResponseWriter, r *http.Request) {
 
 	// Make Sure Username and Password is Not Empty
 	if len(reqBody.Username) == 0 || len(reqBody.Password) == 0 {
-		svc.ResponseBadRequest(w, "invalid authorization")
+		router.ResponseBadRequest(w, "invalid authorization")
 		return
 	}
 
 	// Get JWT Token From Pre-Defined Function
-	token, err := svc.GetJWTToken(reqBody.Username)
+	token, err := auth.GetJWTToken(reqBody.Username)
 	if err != nil {
-		svc.ResponseInternalError(w, err.Error())
+		router.ResponseInternalError(w, err.Error())
 		return
 	}
 
-	var response svc.ResGetJWT
+	var response auth.ResGetJWT
 
 	response.Status = true
 	response.Code = http.StatusOK
 	response.Message = "Success"
 	response.Data.Token = token
 
-	svc.ResponseWrite(w, response.Code, response)
+	router.ResponseWrite(w, response.Code, response)
 }

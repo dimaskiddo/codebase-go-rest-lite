@@ -6,19 +6,17 @@ import (
 	"os/signal"
 	"syscall"
 
-	svc "github.com/dimaskiddo/codebase-go-rest-lite/service"
+	"github.com/dimaskiddo/codebase-go-rest-lite/hlp"
+	"github.com/dimaskiddo/codebase-go-rest-lite/hlp/router"
 )
 
 // Server Variable
-var svr *svc.Server
+var svr *hlp.Server
 
 // Init Function
 func init() {
-	// Initialize Routes
-	routesInit()
-
 	// Initialize Server
-	svr = svc.NewServer(svc.Router)
+	svr = hlp.NewServer(router.Router)
 }
 
 // Main Function

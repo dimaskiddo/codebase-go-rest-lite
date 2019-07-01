@@ -1,4 +1,4 @@
-package service
+package hlp
 
 import (
 	"math"
@@ -11,8 +11,8 @@ import (
 // Config Variable
 var Config *viper.Viper
 
-// ConfigInit Function
-func configInit() {
+// Initialize Function in Helper Configuration
+func init() {
 	// Set Configuration File Value
 	configEnv := strings.ToLower(os.Getenv("CONFIG_ENV"))
 	if len(configEnv) == 0 {
@@ -22,7 +22,7 @@ func configInit() {
 	// Set Configuration Path Value
 	configFilePath := strings.ToLower(os.Getenv("CONFIG_FILE_PATH"))
 	if len(configFilePath) == 0 {
-		configFilePath = "./configs"
+		configFilePath = "./misc/configs"
 	}
 
 	// Set Configuration Type Value
@@ -63,12 +63,15 @@ func configLoadFile() {
 	// Load Configuration File
 	err := Config.ReadInConfig()
 	if err != nil {
-		Log("warn", "config-load-file", err.Error())
+		LogPrintln(LogLevelWarn, "config-load-file", err.Error())
 	}
 }
 
 // ConfigLoadValues Function to Load Configuration Values
 func configLoadValues() {
+	// Server Name Value
+	Config.SetDefault("SERVER_NAME", "codebase-go-rest")
+
 	// Server IP Value
 	Config.SetDefault("SERVER_IP", "0.0.0.0")
 	serverCfg.IP = Config.GetString("SERVER_IP")
@@ -78,10 +81,10 @@ func configLoadValues() {
 	serverCfg.Port = Config.GetString("SERVER_PORT")
 
 	// Server Store Path Value
-	Config.SetDefault("SERVER_STORE_PATH", "./stores")
+	Config.SetDefault("SERVER_STORE_PATH", "./misc/stores")
 
 	// Server Upload Path Value
-	Config.SetDefault("SERVER_UPLOAD_PATH", "./uploads")
+	Config.SetDefault("SERVER_UPLOAD_PATH", "./misc/uploads")
 
 	// Server Upload Limit Value
 	Config.SetDefault("SERVER_UPLOAD_LIMIT", 8)
@@ -89,23 +92,22 @@ func configLoadValues() {
 
 	// Router Base Path
 	Config.SetDefault("ROUTER_BASE_PATH", "")
-	RouterBasePath = Config.GetString("ROUTER_BASE_PATH")
+
+	// Server Log Level Value
+	Config.SetDefault("SERVER_LOG_LEVEL", "info")
 
 	// CORS Allowed Origin Value
 	Config.SetDefault("CORS_ALLOWED_ORIGIN", "*")
-	routerCORSCfg.Origins = Config.GetString("CORS_ALLOWED_ORIGIN")
 
 	// CORS Allowed Method Value
 	Config.SetDefault("CORS_ALLOWED_METHOD", "GET, POST, PUT, PATCH, DELETE, OPTIONS")
-	routerCORSCfg.Methods = Config.GetString("CORS_ALLOWED_METHOD")
 
 	// CORS Allowed Header Value
 	Config.SetDefault("CORS_ALLOWED_HEADER", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
-	routerCORSCfg.Headers = Config.GetString("CORS_ALLOWED_HEADER")
 
 	// Crypt RSA Private Key File Value
-	Config.SetDefault("CRYPT_PRIVATE_KEY_FILE", "./private.key")
+	Config.SetDefault("CRYPT_PRIVATE_KEY_FILE", "./misc/private.key")
 
 	// Crypt RSA Public Key File Value
-	Config.SetDefault("CRYPT_PUBLIC_KEY_FILE", "./public.key")
+	Config.SetDefault("CRYPT_PUBLIC_KEY_FILE", "./misc/public.key")
 }

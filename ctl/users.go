@@ -1,4 +1,4 @@
-package controller
+package ctl
 
 import (
 	"encoding/json"
@@ -7,8 +7,8 @@ import (
 
 	"github.com/go-chi/chi"
 
-	mdl "github.com/dimaskiddo/codebase-go-rest-lite/model"
-	svc "github.com/dimaskiddo/codebase-go-rest-lite/service"
+	"github.com/dimaskiddo/codebase-go-rest-lite/hlp/router"
+	"github.com/dimaskiddo/codebase-go-rest-lite/mdl"
 )
 
 // resGetUsers Struct
@@ -30,7 +30,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	response.Data = mdl.Users
 
 	// Write Response Data to HTTP
-	svc.ResponseWrite(w, response.Code, response)
+	router.ResponseWrite(w, response.Code, response)
 }
 
 // AddUser Function to Add User Data
@@ -47,7 +47,7 @@ func AddUser(w http.ResponseWriter, r *http.Request) {
 	// Insert User to Users Array
 	mdl.Users = append(mdl.Users, user)
 
-	svc.ResponseCreated(w)
+	router.ResponseCreated(w)
 }
 
 // GetUserByID Function to Get User Data By User ID
@@ -58,13 +58,13 @@ func GetUserByID(w http.ResponseWriter, r *http.Request) {
 	// Get ID Parameters From URI Then Convert it to Integer
 	userID, err := strconv.Atoi(paramID)
 	if err != nil {
-		svc.ResponseInternalError(w, err.Error())
+		router.ResponseInternalError(w, err.Error())
 		return
 	}
 
 	// Check if Requested Data in User Array Range
 	if userID <= 0 || userID > len(mdl.Users) {
-		svc.ResponseBadRequest(w, "invalid array index")
+		router.ResponseBadRequest(w, "invalid array index")
 		return
 	}
 
@@ -81,7 +81,7 @@ func GetUserByID(w http.ResponseWriter, r *http.Request) {
 	response.Data = users
 
 	// Write Response Data to HTTP
-	svc.ResponseWrite(w, response.Code, response)
+	router.ResponseWrite(w, response.Code, response)
 }
 
 // PutUserByID Function to Update User Data By User ID
@@ -92,13 +92,13 @@ func PutUserByID(w http.ResponseWriter, r *http.Request) {
 	// Get ID Parameters From URI Then Convert it to Integer
 	userID, err := strconv.Atoi(paramID)
 	if err != nil {
-		svc.ResponseInternalError(w, err.Error())
+		router.ResponseInternalError(w, err.Error())
 		return
 	}
 
 	// Check if Requested Data in User Array Range
 	if userID <= 0 || userID > len(mdl.Users) {
-		svc.ResponseBadRequest(w, "invalid array index")
+		router.ResponseBadRequest(w, "invalid array index")
 		return
 	}
 
@@ -112,7 +112,7 @@ func PutUserByID(w http.ResponseWriter, r *http.Request) {
 	mdl.Users[userID-1].Name = user.Name
 	mdl.Users[userID-1].Email = user.Email
 
-	svc.ResponseUpdated(w)
+	router.ResponseUpdated(w)
 }
 
 // DelUserByID Function to Delete User Data By User ID
@@ -123,18 +123,18 @@ func DelUserByID(w http.ResponseWriter, r *http.Request) {
 	// Get ID Parameters From URI Then Convert it to Integer
 	userID, err := strconv.Atoi(paramID)
 	if err != nil {
-		svc.ResponseInternalError(w, err.Error())
+		router.ResponseInternalError(w, err.Error())
 		return
 	}
 
 	// Check if Requested Data in User Array Range
 	if userID <= 0 || userID > len(mdl.Users) {
-		svc.ResponseBadRequest(w, "invalid array index")
+		router.ResponseBadRequest(w, "invalid array index")
 		return
 	}
 
 	// Delete User Data from Users Array
 	mdl.Users = append(mdl.Users[:userID-1], mdl.Users[userID:]...)
 
-	svc.ResponseSuccess(w, "")
+	router.ResponseSuccess(w, "")
 }

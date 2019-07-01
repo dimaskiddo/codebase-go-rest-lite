@@ -1,19 +1,18 @@
 FROM dimaskiddo/alpine:base
 MAINTAINER Dimas Restu Hidayanto <dimas.restu@student.upi.edu>
 
-ARG SERVICE_NAME="codebase-go-lite"
-
-ENV CONFIG_ENV="PROD" \
-    CONFIG_FILE_PATH="./configs" \
-    CONFIG_LOG_LEVEL="INFO" \
-    CONFIG_LOG_SERVICE="$SERVICE_NAME"
+ARG SERVICE_NAME="codebase-go-rest-lite"
+ENV CONFIG_ENV="PROD"
 
 WORKDIR /usr/src/app
-COPY build/ .
-RUN chmod 777 stores uploads
+
+COPY misc/ ./misc
+COPY dist/${SERVICE_NAME}_linux_amd64/main ./main
+
+RUN chmod 777 misc/stores misc/uploads
 
 EXPOSE 3000
 HEALTHCHECK --interval=5s --timeout=3s CMD ["curl", "http://127.0.0.1:3000/health"] || exit 1
 
-VOLUME ["/usr/src/app/stores","/usr/src/app/uploads"]
+VOLUME ["/usr/src/app/misc/stores","/usr/src/app/misc/uploads"]
 CMD ["./main"]
