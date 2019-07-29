@@ -2,17 +2,17 @@ FROM dimaskiddo/alpine:base
 MAINTAINER Dimas Restu Hidayanto <dimas.restu@student.upi.edu>
 
 ARG SERVICE_NAME="codebase-go-rest-lite"
-ENV CONFIG_ENV="PROD"
+ENV CONFIG_ENV="production"
 
 WORKDIR /usr/src/app
 
-COPY misc/ ./misc
+COPY share/ ./share
 COPY dist/${SERVICE_NAME}_linux_amd64/main ./main
 
-RUN chmod 777 misc/stores misc/uploads
+RUN chmod 777 share/store share/upload
 
 EXPOSE 3000
 HEALTHCHECK --interval=5s --timeout=3s CMD ["curl", "http://127.0.0.1:3000/health"] || exit 1
 
-VOLUME ["/usr/src/app/misc/stores","/usr/src/app/misc/uploads"]
+VOLUME ["/usr/src/app/share/store","/usr/src/app/share/upload"]
 CMD ["./main"]
