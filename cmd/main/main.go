@@ -2,21 +2,30 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"os/signal"
 	"syscall"
 
-	"github.com/dimaskiddo/codebase-go-rest-lite/hlp"
-	"github.com/dimaskiddo/codebase-go-rest-lite/hlp/router"
+	"github.com/dimaskiddo/codebase-go-rest-lite/pkg/router"
+	"github.com/dimaskiddo/codebase-go-rest-lite/pkg/server"
+
+	"github.com/dimaskiddo/codebase-go-rest-lite/internal"
 )
 
 // Server Variable
-var svr *hlp.Server
+var svr *server.Server
 
 // Init Function
 func init() {
+	// Set Go Log Flags
+	log.SetFlags(log.Flags() &^ (log.Ldate | log.Ltime))
+
+	// Load Routes
+	internal.LoadRoutes()
+
 	// Initialize Server
-	svr = hlp.NewServer(router.Router)
+	svr = server.NewServer(router.Router)
 }
 
 // Main Function

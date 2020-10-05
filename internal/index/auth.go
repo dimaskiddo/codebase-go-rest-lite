@@ -1,11 +1,11 @@
-package ctl
+package index
 
 import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/dimaskiddo/codebase-go-rest-lite/hlp/auth"
-	"github.com/dimaskiddo/codebase-go-rest-lite/hlp/router"
+	"github.com/dimaskiddo/codebase-go-rest-lite/pkg/auth"
+	"github.com/dimaskiddo/codebase-go-rest-lite/pkg/router"
 )
 
 // GetAuth Function to Get Authorization Token
